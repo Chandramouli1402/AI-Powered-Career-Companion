@@ -1,6 +1,7 @@
 // src/firebase-config.js
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getDatabase } from "firebase/database";  // Import for Realtime Database
 
 // Firebase configuration (replace with your Firebase project config)
 const firebaseConfig = {
@@ -11,12 +12,15 @@ const firebaseConfig = {
     messagingSenderId: "754113344498",
     appId: "1:754113344498:web:60cadb85b008b99382716b",
     measurementId: "G-B4ML4P5DSZ"
-  };
+};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Get the Firebase Authentication instance
+// Initialize Firebase Authentication
 const auth = getAuth(app);
 
-export { auth };
+// Initialize Firebase Realtime Database
+const db = getDatabase(app);
+
+export { auth, db };  // Export both 'auth' and 'db'
