@@ -1,0 +1,63 @@
+/* src/Login.css */
+.login-container {
+    margin-top: 50px;
+    text-align: center;
+    max-width: 350px; /* Reduced width */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px; /* Reduced padding */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+
+.login-container:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+}
+
+.login-container h2 {
+    color: #4CAF50;
+    font-size: 1.8rem; /* Slightly smaller font size */
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.login-container input {
+    margin-bottom: 12px; /* Reduced space between inputs */
+    padding: 10px;
+    width: 75%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.login-container input:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+.login-container button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    width: 40%;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.login-container button:hover {
+    background-color: #45a049;
+    cursor: pointer;
+}
+
+.login-container .error {
+    color: #ff5c5c;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
