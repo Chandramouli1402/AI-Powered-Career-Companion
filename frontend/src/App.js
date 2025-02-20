@@ -5,6 +5,7 @@ import Login from "./Login";
 import Profile from "./components/Profile/Profile"; // Update path based on your structure
 import Dashboard from "./components/Dashboard"; // Import the Dashboard component
 import { AuthProvider } from "./context/AuthContext"; // Import AuthProvider
+import UploadResume from "./components/UploadResume/UploadResume"
 import './App.css'; // Keep your global CSS file
 
 function App() {
@@ -22,6 +23,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/dashboard" element={<Dashboard />} /> {/* Add route for Dashboard */}
+            <Route path="/upload-resume" element={<UploadResume />} />
+            
           </Routes>
         </div>
       </Router>
