@@ -1,10 +1,9 @@
-// src/firebase-config.js
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getDatabase, ref, update } from "firebase/database";  // Realtime Database
-import { getFirestore, collection, addDoc } from "firebase/firestore";  // Firestore
+import { getDatabase, ref, update, get } from "firebase/database"; // Realtime DB
+import { getFirestore, collection, addDoc } from "firebase/firestore"; // Firestore
 
-// 🔹 Firebase configuration (Replace with your actual credentials)
+// 🔹 Firebase configuration (Replace with actual credentials)
 const firebaseConfig = {
     apiKey: "AIzaSyCc9qZuTo0PkwIWoQUlhBjpNjc3ENQGTZc",
     authDomain: "ai-powered-career-companion.firebaseapp.com",
@@ -19,8 +18,54 @@ const firebaseConfig = {
 // 🔹 Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const dbRealtime = getDatabase(app);  // Realtime Database
-const dbFirestore = getFirestore(app);  // Firestore Database
+const dbRealtime = getDatabase(app); // Realtime Database
+const dbFirestore = getFirestore(app); // Firestore Database
+
+/**
+ * 🔹 Fetch user profile data from Firebase Realtime Database.
+ * @param {string} userId - The user's unique ID.
+ * @returns {Promise<Object|null>} - User profile data or null if not found.
+ */
+export const fetchUserProfile = async (userId) => {
+    if (!userId) {
+        console.error("❌ Error: User ID is required to fetch profile data.");
+        return null;
+    }
+
+    try {
+        const userRef = ref(dbRealtime, `users/${userId}`);
+        const snapshot = await get(userRef);
+        if (snapshot.exists()) {
+            return snapshot.val();
+        } else {
+            console.warn("⚠️ No profile data found for user:", userId);
+            return null;
+        }
+    } catch (error) {
+        console.error("❌ Error fetching user profile:", error);
+        return null;
+    }
+};
+
+/**
+ * 🔹 Update user profile data in Firebase Realtime Database.
+ * @param {string} userId - The user's unique ID.
+ * @param {Object} updatedData - The user profile data to update.
+ */
+export const updateUserProfile = async (userId, updatedData) => {
+    if (!userId || !updatedData) {
+        console.error("❌ Error: User ID and profile data are required.");
+        return;
+    }
+
+    try {
+        const userRef = ref(dbRealtime, `users/${userId}`);
+        await update(userRef, updatedData); // Use update() to prevent overwriting other fields
+        console.log("✅ Profile updated successfully.");
+    } catch (error) {
+        console.error("❌ Error updating profile:", error);
+    }
+};
 
 /**
  * 🔹 Save resume link in Firebase Realtime Database without overwriting other data.
@@ -36,10 +81,9 @@ export const saveResumeLink = async (userId, link) => {
     try {
         const updateData = {
             resume: link,
-            resumeTimestamp: Date.now(),  // Store the upload time
+            resumeTimestamp: Date.now(), // Store the upload time
         };
 
-        // 🔹 Use update() to prevent overwriting other user data
         await update(ref(dbRealtime, `users/${userId}`), updateData);
         console.log("✅ Resume link saved successfully.");
     } catch (error) {
@@ -58,7 +102,7 @@ export const uploadCourses = async (courses) => {
     }
 
     try {
-        const coursesRef = collection(dbFirestore, "courses"); // Firestore collection reference
+        const coursesRef = collection(dbFirestore, "courses");
         for (let course of courses) {
             await addDoc(coursesRef, course);
             console.log(`✅ Uploaded: ${course.title}`);
@@ -69,5 +113,5 @@ export const uploadCourses = async (courses) => {
     }
 };
 
-// 🔹 Export required Firebase instances
+// 🔹 Export Firebase instances and functions
 export { app, auth, dbRealtime, dbFirestore };

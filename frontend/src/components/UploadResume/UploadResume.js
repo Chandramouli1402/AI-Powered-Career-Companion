@@ -3,6 +3,7 @@ import axios from "axios";
 import { auth } from "../../firebase-config";
 import { saveResumeLink } from "../../firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
+import "./UploadResume.css";
 
 const UploadResume = () => {
     const [file, setFile] = useState(null);
@@ -111,25 +112,25 @@ const UploadResume = () => {
     };
 
     return (
-        <div className="container mx-auto px-6 py-10 max-w-3xl bg-white shadow-md rounded-lg">
-            <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">AI-Powered Resume Reviewer</h2>
+        <div className="container">
+            <h2>AI-Powered Resume Reviewer</h2>
 
-            {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">{error}</div>}
-            {progress && <div className="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded mb-4">{progress}</div>}
+            {error && <div className="bg-red-100">{error}</div>}
+            {progress && <div className="bg-blue-100">{progress}</div>}
 
             <div className="mb-6">
                 <input
                     type="file"
                     accept=".pdf"
                     onChange={handleFileChange}
-                    className="block w-full text-sm text-gray-600 file:mr-4 file:py-3 file:px-5 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-200 cursor-pointer"
+                    className="file-input"
                 />
             </div>
 
             <button
                 onClick={handleUpload}
                 disabled={uploading || !file}
-                className={`w-full py-3 rounded-lg font-semibold text-white transition duration-200 ${uploading || !file ? "bg-gray-300 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-700"}`}
+                className={`upload-button ${uploading || !file ? "disabled" : ""}`}
             >
                 {uploading ? "Processing..." : "Upload Resume"}
             </button>
@@ -137,7 +138,7 @@ const UploadResume = () => {
             {resumeLink && (
                 <div className="mt-6 p-4 bg-green-100 rounded-lg text-center">
                     <p className="text-green-700 font-semibold mb-2">✅ Resume Uploaded Successfully!</p>
-                    <a href={resumeLink} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline">
+                    <a href={resumeLink} target="_blank" rel="noopener noreferrer" className="resume-link">
                         View Resume
                     </a>
                 </div>
@@ -145,10 +146,10 @@ const UploadResume = () => {
 
             {jobRecommendations.length > 0 && (
                 <div className="mt-6">
-                    <h3 className="text-xl font-bold text-gray-800 mb-4">💼 Recommended Job Roles:</h3>
+                    <h3>💼 Recommended Job Roles:</h3>
                     <div className="space-y-3">
                         {jobRecommendations.map((recommendation, index) => (
-                            <div key={index} className="p-4 bg-gray-100 rounded-lg shadow-md text-gray-700 font-medium">
+                            <div key={index} className="recommendation">
                                 {recommendation}
                             </div>
                         ))}

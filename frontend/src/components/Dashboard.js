@@ -1,20 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom";
+import "./Dashboard.css"; // Import the CSS file
 
 const Dashboard = () => {
   return (
-    <div>
-      <h1>Welcome to the Dashboard!</h1>
+    <div className="dashboard-container">
+      <h2>Welcome to Career Companion</h2>
+      <p>Select a section to explore:</p>
 
-      {/* Profile Button */}
-      <Link to="/profile">
-        <button>Profile</button>
-      </Link>
-
-      {/* Resume Reviewer Button */}
-      <Link to="/upload-resume">
-        <button>Resume Reviewer</button>
-      </Link>
+      <div className="dashboard-buttons">
+        <Link to="/upload-resume" className="btn blue">📂 Resume Reviewer</Link>
+        <Link to="/skills-learn" className="btn green">🎯 Skills to Learn</Link>
+        <Link to="/qa-forum" className="btn purple">💬 Q/A Forum</Link>
+        <Link to="/hackathon-jobs" className="btn red">🚀 Hackathon & Job Listings</Link>
+      </div>
     </div>
   );
 };

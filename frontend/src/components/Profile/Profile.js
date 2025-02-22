@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { db } from "../../firebase-config"; // Correct path to firebase-config
-import { ref, set, get } from "firebase/database"; // Import necessary functions for reading and writing to DB
-import { getAuth, onAuthStateChanged } from "firebase/auth"; // Import Firebase Authentication functions
-import './Profile.css'; // Import the Profile.css
+import { dbRealtime } from "../../firebase-config"; // ✅ Correct Firebase import
+import { ref, set, get } from "firebase/database"; // ✅ Correct Firebase functions
+import { getAuth, onAuthStateChanged } from "firebase/auth"; // ✅ Firebase Auth
+import "./Profile.css"; // Import styles
 
 const Profile = () => {
   const [user, setUser] = useState({
@@ -12,37 +12,33 @@ const Profile = () => {
     skills: "",
   });
 
-  const [userId, setUserId] = useState(null); // Holds the authenticated user's ID
-  const [loading, setLoading] = useState(true); // Loading state to handle loading data
+  const [userId, setUserId] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check if the user is authenticated when the component mounts
+    // ✅ Check user authentication
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        // If the user is logged in, set the user ID
         setUserId(user.uid);
       } else {
-        // If no user is logged in, you can redirect to login or show a message
         console.log("User not authenticated.");
         setUserId(null);
       }
-      setLoading(false); // Set loading to false once authentication check is done
+      setLoading(false);
     });
 
-    // Cleanup the listener on component unmount
     return () => unsubscribe();
   }, []);
 
   useEffect(() => {
     if (userId) {
-      // Fetch user data from Firebase if userId is available
       const fetchUserData = async () => {
         try {
-          const userRef = ref(db, 'users/' + userId); // Reference to the user's data in Realtime Database
-          const snapshot = await get(userRef); // Fetch user data from Firebase
+          const userRef = ref(dbRealtime, `users/${userId}`); // ✅ Use dbRealtime
+          const snapshot = await get(userRef);
           if (snapshot.exists()) {
-            setUser(snapshot.val()); // Set user data to state if it exists in the database
+            setUser(snapshot.val());
           } else {
             console.log("No data available for the user.");
           }
@@ -51,9 +47,9 @@ const Profile = () => {
         }
       };
 
-      fetchUserData(); // Call the function to fetch data
+      fetchUserData();
     }
-  }, [userId]); // Run the effect when the userId changes
+  }, [userId]);
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -61,9 +57,9 @@ const Profile = () => {
 
   const handleSave = async () => {
     if (userId) {
-      const userRef = ref(db, 'users/' + userId); // Reference to the user's data in the database
+      const userRef = ref(dbRealtime, `users/${userId}`); // ✅ Use dbRealtime
       try {
-        await set(userRef, user); // Save the updated user data to Firebase
+        await set(userRef, user);
         alert("Profile updated successfully!");
       } catch (error) {
         console.error("Error updating profile: ", error);
@@ -74,7 +70,6 @@ const Profile = () => {
     }
   };
 
-  // While loading the authentication state or fetching data, show loading state
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -82,34 +77,10 @@ const Profile = () => {
   return (
     <div>
       <h2>Profile Page</h2>
-      <input
-        type="text"
-        name="name"
-        value={user.name}
-        onChange={handleChange}
-        placeholder="Name"
-      />
-      <input
-        type="text"
-        name="degree"
-        value={user.degree}
-        onChange={handleChange}
-        placeholder="Degree"
-      />
-      <input
-        type="text"
-        name="college"
-        value={user.college}
-        onChange={handleChange}
-        placeholder="College"
-      />
-      <input
-        type="text"
-        name="skills"
-        value={user.skills}
-        onChange={handleChange}
-        placeholder="Skills"
-      />
+      <input type="text" name="name" value={user.name} onChange={handleChange} placeholder="Name" />
+      <input type="text" name="degree" value={user.degree} onChange={handleChange} placeholder="Degree" />
+      <input type="text" name="college" value={user.college} onChange={handleChange} placeholder="College" />
+      <input type="text" name="skills" value={user.skills} onChange={handleChange} placeholder="Skills" />
       <button onClick={handleSave}>Save</button>
     </div>
   );

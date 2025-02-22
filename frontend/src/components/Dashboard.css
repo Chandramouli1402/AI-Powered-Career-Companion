@@ -1,0 +1,79 @@
+/* Import Inter font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Dashboard Container */
+.dashboard-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Heading */
+.dashboard-container h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
+
+/* Subheading */
+.dashboard-container p {
+    font-size: 1rem;
+    color: #4b5563;
+    margin-bottom: 2rem;
+}
+
+/* Buttons Grid */
+.dashboard-buttons {
+    display: grid;
+    grid-template-columns: 1fr; /* One column by default */
+    gap: 1rem; /* Spacing between buttons */
+}
+
+/* Button Styling */
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: #ffffff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Button Colors */
+.btn.blue {
+    background-color: #3b82f6; /* Blue */
+}
+
+.btn.green {
+    background-color: #10b981; /* Green */
+}
+
+.btn.purple {
+    background-color: #8b5cf6; /* Purple */
+}
+
+.btn.red {
+    background-color: #ef4444; /* Red */
+}
+
+/* Ensure buttons are always stacked vertically */
+@media (min-width: 768px) {
+    .dashboard-buttons {
+        grid-template-columns: 1fr; /* Always one column, even on larger screens */
+    }
+}
