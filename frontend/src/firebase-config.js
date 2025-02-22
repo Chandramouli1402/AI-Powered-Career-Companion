@@ -1,9 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getDatabase, ref, update, get } from "firebase/database"; // Realtime DB
-import { getFirestore, collection, addDoc } from "firebase/firestore"; // Firestore
+import { getDatabase, ref, update, get } from "firebase/database"; // Realtime Database for user profiles
+import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore"; // Firestore for courses
 
-// 🔹 Firebase configuration (Replace with actual credentials)
+// 🔹 Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyCc9qZuTo0PkwIWoQUlhBjpNjc3ENQGTZc",
     authDomain: "ai-powered-career-companion.firebaseapp.com",
@@ -18,8 +18,8 @@ const firebaseConfig = {
 // 🔹 Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const dbRealtime = getDatabase(app); // Realtime Database
-const dbFirestore = getFirestore(app); // Firestore Database
+const dbRealtime = getDatabase(app); // Realtime Database for user profiles
+const dbFirestore = getFirestore(app); // Firestore for courses
 
 /**
  * 🔹 Fetch user profile data from Firebase Realtime Database.
@@ -113,5 +113,24 @@ export const uploadCourses = async (courses) => {
     }
 };
 
+/**
+ * 🔹 Fetch all courses from Firestore.
+ * @returns {Promise<Array>} - List of course objects.
+ */
+export const fetchCourses = async () => {
+    try {
+        const coursesRef = collection(dbFirestore, "courses");
+        const querySnapshot = await getDocs(coursesRef);
+        const courses = querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(), // 🔥 Directly retrieve all fields
+        }));
+        console.log("✅ Courses fetched successfully!", courses);
+        return courses;
+    } catch (error) {
+        console.error("❌ Error fetching courses:", error);
+        return [];
+    }
+};
 // 🔹 Export Firebase instances and functions
 export { app, auth, dbRealtime, dbFirestore };

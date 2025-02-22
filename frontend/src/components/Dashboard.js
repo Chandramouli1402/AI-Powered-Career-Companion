@@ -10,7 +10,7 @@ const Dashboard = () => {
 
       <div className="dashboard-buttons">
         <Link to="/upload-resume" className="btn blue">📂 Resume Reviewer</Link>
-        <Link to="/skills-learn" className="btn green">🎯 Skills to Learn</Link>
+        <Link to="/skills-to-learn" className="btn green">🎯 Skills to Learn</Link>
         <Link to="/qa-forum" className="btn purple">💬 Q/A Forum</Link>
         <Link to="/hackathon-jobs" className="btn red">🚀 Hackathon & Job Listings</Link>
       </div>

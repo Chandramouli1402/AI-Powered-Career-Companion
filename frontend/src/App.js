@@ -6,6 +6,7 @@ import Profile from "./components/Profile/Profile"; // Update path based on your
 import Dashboard from "./components/Dashboard"; // Import the Dashboard component
 import { AuthProvider } from "./context/AuthContext"; // Import AuthProvider
 import UploadResume from "./components/UploadResume/UploadResume"
+import SkillsToLearn from "./components/SkillsToLearn/SkillsToLearn"
 import './App.css'; // Keep your global CSS file
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/dashboard" element={<Dashboard />} /> {/* Add route for Dashboard */}
             <Route path="/upload-resume" element={<UploadResume />} />
+            <Route path="/skills-to-learn" element={<SkillsToLearn />} />
             
           </Routes>
         </div>
