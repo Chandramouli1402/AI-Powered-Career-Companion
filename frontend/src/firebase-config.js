@@ -1,9 +1,10 @@
 // src/firebase-config.js
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getDatabase, ref, update } from "firebase/database";  // Use update() to avoid overwriting data
+import { getDatabase, ref, update } from "firebase/database";  // Realtime Database
+import { getFirestore, collection, addDoc } from "firebase/firestore";  // Firestore
 
-// 🔹 Firebase configuration (Replace with your actual config)
+// 🔹 Firebase configuration (Replace with your actual credentials)
 const firebaseConfig = {
     apiKey: "AIzaSyCc9qZuTo0PkwIWoQUlhBjpNjc3ENQGTZc",
     authDomain: "ai-powered-career-companion.firebaseapp.com",
@@ -18,10 +19,11 @@ const firebaseConfig = {
 // 🔹 Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getDatabase(app);
+const dbRealtime = getDatabase(app);  // Realtime Database
+const dbFirestore = getFirestore(app);  // Firestore Database
 
 /**
- * 🔹 Function to save resume link in Firebase without overwriting existing data.
+ * 🔹 Save resume link in Firebase Realtime Database without overwriting other data.
  * @param {string} userId - The user's unique ID.
  * @param {string} link - The resume download URL.
  */
@@ -38,11 +40,34 @@ export const saveResumeLink = async (userId, link) => {
         };
 
         // 🔹 Use update() to prevent overwriting other user data
-        await update(ref(db, `users/${userId}`), updateData);
+        await update(ref(dbRealtime, `users/${userId}`), updateData);
         console.log("✅ Resume link saved successfully.");
     } catch (error) {
         console.error("❌ Firebase save error:", error);
     }
 };
 
-export { app, auth, db };
+/**
+ * 🔹 Upload multiple courses to Firestore Database.
+ * @param {Array} courses - List of course objects to upload.
+ */
+export const uploadCourses = async (courses) => {
+    if (!Array.isArray(courses) || courses.length === 0) {
+        console.error("❌ Error: Invalid course list.");
+        return;
+    }
+
+    try {
+        const coursesRef = collection(dbFirestore, "courses"); // Firestore collection reference
+        for (let course of courses) {
+            await addDoc(coursesRef, course);
+            console.log(`✅ Uploaded: ${course.title}`);
+        }
+        console.log("🎉 All courses uploaded successfully!");
+    } catch (error) {
+        console.error("❌ Error uploading courses:", error);
+    }
+};
+
+// 🔹 Export required Firebase instances
+export { app, auth, dbRealtime, dbFirestore };
