@@ -1,3 +1,4 @@
 uploads/
 credentials.json
 .env
+serviceAccountKey.json
