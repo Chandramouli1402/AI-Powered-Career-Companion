@@ -4,6 +4,7 @@ const multer = require("multer");
 const path = require("path");
 const extractTextFromPDF = require("./extractText");
 const recommendJobs = require("./recommendJobs");
+const admin = require("firebase-admin");
 
 require("dotenv").config();
 const app = express();
@@ -11,6 +12,17 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json({ limit: "10mb" }));
 app.use(cors());
+
+// Initialize Firebase Admin SDK
+
+const serviceAccount = require("./serviceAccountKey.json"); // Ensure correct path
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://ai-powered-career-companion-default-rtdb.firebaseio.com"
+});
+
+const db = admin.database();
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
@@ -59,6 +71,29 @@ app.post("/recommend-jobs", async (req, res) => {
     } catch (error) {
         console.error("Recommendation error:", error);
         res.status(500).json({ error: "Failed to analyze resume" });
+    }
+});
+
+// API endpoint to add a question to Firebase
+app.post("/add-question", async (req, res) => {
+    try {
+        const { userId, question } = req.body;
+
+        if (!userId || !question) {
+            return res.status(400).json({ error: "User ID and question are required" });
+        }
+
+        const questionRef = db.ref(`users/${userId}/questions`);
+        const newQuestionRef = questionRef.push();
+        await newQuestionRef.set({
+            question: question,
+            timestamp: admin.database.ServerValue.TIMESTAMP,
+        });
+
+        res.status(200).json({ message: "Question added successfully!", id: newQuestionRef.key });
+    } catch (error) {
+        console.error("Error adding question:", error);
+        res.status(500).json({ error: "Internal Server Error" });
     }
 });
 

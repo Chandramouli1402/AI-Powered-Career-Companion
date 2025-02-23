@@ -7,6 +7,7 @@ import Dashboard from "./components/Dashboard"; // Import the Dashboard componen
 import { AuthProvider } from "./context/AuthContext"; // Import AuthProvider
 import UploadResume from "./components/UploadResume/UploadResume"
 import SkillsToLearn from "./components/SkillsToLearn/SkillsToLearn"
+import QASection from "./components/QASection/QASection"; // Import QASection
 import './App.css'; // Keep your global CSS file
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} /> {/* Add route for Dashboard */}
             <Route path="/upload-resume" element={<UploadResume />} />
             <Route path="/skills-to-learn" element={<SkillsToLearn />} />
-            
+            <Route path="/qa/*" element={<QASection />} />           
           </Routes>
         </div>
       </Router>

@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getDatabase, ref, update, get } from "firebase/database"; // Realtime Database for user profiles
-import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore"; // Firestore for courses
+import { getDatabase, ref, update, get, push, set } from "firebase/database"; // Realtime Database
+import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore"; // Firestore
 
 // 🔹 Firebase configuration
 const firebaseConfig = {
@@ -18,8 +18,8 @@ const firebaseConfig = {
 // 🔹 Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const dbRealtime = getDatabase(app); // Realtime Database for user profiles
-const dbFirestore = getFirestore(app); // Firestore for courses
+const dbRealtime = getDatabase(app); // Realtime Database
+const dbFirestore = getFirestore(app); // Firestore Database
 
 /**
  * 🔹 Fetch user profile data from Firebase Realtime Database.
@@ -35,15 +35,28 @@ export const fetchUserProfile = async (userId) => {
     try {
         const userRef = ref(dbRealtime, `users/${userId}`);
         const snapshot = await get(userRef);
-        if (snapshot.exists()) {
-            return snapshot.val();
-        } else {
-            console.warn("⚠️ No profile data found for user:", userId);
-            return null;
-        }
+        return snapshot.exists() ? snapshot.val() : null;
     } catch (error) {
         console.error("❌ Error fetching user profile:", error);
         return null;
+    }
+};
+
+/**
+ * 🔹 Fetch all courses from Firestore.
+ * @returns {Promise<Array>} - List of course objects.
+ */
+export const fetchCourses = async () => {
+    try {
+        const coursesRef = collection(dbFirestore, "courses");
+        const querySnapshot = await getDocs(coursesRef);
+        return querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(), // 🔥 Retrieve all fields
+        }));
+    } catch (error) {
+        console.error("❌ Error fetching courses:", error);
+        return [];
     }
 };
 
@@ -60,7 +73,7 @@ export const updateUserProfile = async (userId, updatedData) => {
 
     try {
         const userRef = ref(dbRealtime, `users/${userId}`);
-        await update(userRef, updatedData); // Use update() to prevent overwriting other fields
+        await update(userRef, updatedData);
         console.log("✅ Profile updated successfully.");
     } catch (error) {
         console.error("❌ Error updating profile:", error);
@@ -68,7 +81,7 @@ export const updateUserProfile = async (userId, updatedData) => {
 };
 
 /**
- * 🔹 Save resume link in Firebase Realtime Database without overwriting other data.
+ * 🔹 Save resume link in Firebase Realtime Database.
  * @param {string} userId - The user's unique ID.
  * @param {string} link - The resume download URL.
  */
@@ -79,11 +92,7 @@ export const saveResumeLink = async (userId, link) => {
     }
 
     try {
-        const updateData = {
-            resume: link,
-            resumeTimestamp: Date.now(), // Store the upload time
-        };
-
+        const updateData = { resume: link, resumeTimestamp: Date.now() };
         await update(ref(dbRealtime, `users/${userId}`), updateData);
         console.log("✅ Resume link saved successfully.");
     } catch (error) {
@@ -114,23 +123,47 @@ export const uploadCourses = async (courses) => {
 };
 
 /**
- * 🔹 Fetch all courses from Firestore.
- * @returns {Promise<Array>} - List of course objects.
+ * 🔹 Save a question to Firebase Realtime Database.
+ * @param {string} userId - The user's unique ID.
+ * @param {string} questionText - The question text.
  */
-export const fetchCourses = async () => {
+export const saveQuestion = async (userId, questionText) => {
+    if (!userId || !questionText) {
+        console.error("❌ Error: User ID and question are required.");
+        return;
+    }
+
     try {
-        const coursesRef = collection(dbFirestore, "courses");
-        const querySnapshot = await getDocs(coursesRef);
-        const courses = querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(), // 🔥 Directly retrieve all fields
-        }));
-        console.log("✅ Courses fetched successfully!", courses);
-        return courses;
+        const questionsRef = ref(dbRealtime, "questions");
+        const newQuestionRef = push(questionsRef); // Create a unique ID for each question
+
+        await set(newQuestionRef, {
+            question: questionText,
+            userId,
+            timestamp: Date.now(),
+            answers: [] // Ensuring a consistent data structure
+        });
+
+        console.log("✅ Question saved successfully.");
     } catch (error) {
-        console.error("❌ Error fetching courses:", error);
-        return [];
+        console.error("❌ Error saving question:", error);
     }
 };
-// 🔹 Export Firebase instances and functions
+
+/**
+ * 🔹 Fetch all questions from Firebase Realtime Database.
+ * @returns {Promise<Object>} - Returns an object with questions.
+ */
+export const fetchQuestions = async () => {
+    try {
+        const questionsRef = ref(dbRealtime, "questions");
+        const snapshot = await get(questionsRef);
+        return snapshot.exists() ? snapshot.val() : {}; // Return data if exists, else empty object
+    } catch (error) {
+        console.error("❌ Error fetching questions:", error);
+        return {};
+    }
+};
+
+// 🔹 Export Firebase instances
 export { app, auth, dbRealtime, dbFirestore };
