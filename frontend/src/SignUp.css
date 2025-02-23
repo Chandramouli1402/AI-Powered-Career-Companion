@@ -50,9 +50,51 @@
     margin-top: 0.5rem;
 }
 
-/* Button Styling */
-.signup-container button {
-    padding: 0.75rem;
+/* Added styles for Sign Up section */
+.signup-text {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #4b5563;
+    font-weight: 500;
+}
+
+/* Sign Up button - Smaller width and centered */
+.signup-button {
+    margin-top: 0.5rem;
+    padding: 0.5rem 1.5rem;
+    background-color: #10b981;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: auto; /* Adjusted width */
+    display: inline-block; /* Makes it fit the content */
+}
+
+.signup-button:hover {
+    background-color: #059669;
+}
+
+.signup-button:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+}
+
+/* Already have an account text */
+.signin-text {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #4b5563;
+    font-weight: 500;
+}
+
+/* Login button */
+.signin-button {
+    margin-top: 0.5rem;
+    padding: 0.5rem 1.5rem;
     background-color: #3b82f6;
     color: #ffffff;
     border: none;
@@ -61,15 +103,12 @@
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.2s ease;
+    width: auto; /* Adjusted width */
+    display: inline-block;
 }
 
-.signup-container button:hover {
+.signin-button:hover {
     background-color: #2563eb;
-}
-
-.signup-container button:disabled {
-    background-color: #9ca3af;
-    cursor: not-allowed;
 }
 
 /* Link Styling */

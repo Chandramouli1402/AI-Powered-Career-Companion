@@ -1,9 +1,8 @@
-// src/Login.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";  // Keep this import
-import { auth } from './firebase-config';  // Use auth imported from firebase-config
-import "./Login.css"; // Import the Login CSS file
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from './firebase-config';
+import "./Login.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,8 +13,8 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password);  // Use the updated method
-      navigate("/dashboard"); // Redirect after successful login (you can change the route)
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/dashboard");
     } catch (error) {
       setError(error.message);
     }
@@ -42,6 +41,12 @@ const Login = () => {
         {error && <p className="error">{error}</p>}
         <button type="submit">Login</button>
       </form>
+
+      {/* New Section for Signup */}
+      <p className="signup-text">Or create an account?</p>
+      <button className="signup-button" onClick={() => navigate("/signup")}>
+        Sign Up
+      </button>
     </div>
   );
 };

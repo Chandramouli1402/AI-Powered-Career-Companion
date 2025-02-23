@@ -40,8 +40,14 @@ const SignUp = () => {
         />
         <br />
         {error && <p className="error">{error}</p>}
-        <button type="submit">Sign Up</button>
+        <button type="submit" className="signup-button">Sign Up</button>
       </form>
+
+      {/* Already have an account section */}
+      <p className="signin-text">Already have an account?</p>
+      <button className="signin-button" onClick={() => navigate("/login")}>
+        Login
+      </button>
     </div>
   );
 };

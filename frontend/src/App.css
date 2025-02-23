@@ -21,15 +21,50 @@ body {
 /* Header Styling */
 .App-header {
     background-color: #3b82f6; /* Blue background */
-    padding: 2rem;
+    padding: 3rem 2rem;
     color: #ffffff; /* White text */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
 }
 
+/* App Title */
 .App-header h1 {
     font-size: 2.5rem;
     font-weight: 700;
-    margin: 0;
+    margin: 0 auto;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Header Buttons Container */
+.header-buttons {
+    display: flex;
+    gap: 1rem; /* Space between buttons */
+    position: absolute;
+    right: 2rem;
+}
+
+/* Navigation Buttons (Profile & Dashboard) */
+.nav-button {
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #2563eb; /* Slightly darker blue */
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+.nav-button:hover {
+    background-color: #1e40af; /* Darker blue on hover */
+    transform: scale(1.05); /* Slight zoom effect */
 }
 
 /* Main Content Area */
