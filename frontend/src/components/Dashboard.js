@@ -13,7 +13,9 @@ const Dashboard = () => {
         <Link to="/upload-resume" className="btn blue">📂 Resume Reviewer</Link>
         <Link to="/skills-to-learn" className="btn green">🎯 Skills to Learn</Link>
         <Link to="/qa" className="btn purple">💬 Q/A Forum</Link>
-        <Link to="/hackathon-jobs" className="btn red">🚀 Hackathon & Job Listings</Link>
+        <Link to="/hackathon" className="btn red">🚀 Hackathon </Link>
+        <Link to="/jobs" className="btn black"> 💼 Job Listings</Link>
+
       </div>
     </div>
   );

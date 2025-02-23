@@ -1,0 +1,96 @@
+/* JobList.css */
+
+/* 🌟 Main Container */
+.job-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* 🌟 Title */
+.job-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 20px;
+}
+
+/* 🌟 Dropdown Label */
+.filter-label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-right: 10px;
+}
+
+/* 🌟 Dropdown Select */
+.filter-select {
+    padding: 8px;
+    font-size: 16px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    background: #f9f9f9;
+    cursor: pointer;
+}
+
+/* 🌟 Job List */
+.job-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+/* 🌟 Job Items */
+.job-item {
+    background: #f9f9f9;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.job-item strong {
+    font-size: 18px;
+    color: #007bff;
+}
+
+.job-item span {
+    font-size: 14px;
+    color: #444;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.job-item a {
+    text-decoration: none;
+    color: white;
+    background: #007bff;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    display: inline-block;
+}
+
+.job-item a:hover {
+    background: #0056b3;
+}
+
+/* 🌟 No Jobs Message */
+.no-jobs {
+    font-size: 16px;
+    font-weight: bold;
+    color: #777;
+    margin-top: 20px;
+}
+
+/* 🌟 Responsive */
+@media (max-width: 768px) {
+    .job-container {
+        width: 90%;
+    }
+}

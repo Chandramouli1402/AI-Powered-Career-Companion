@@ -8,6 +8,8 @@ import { AuthProvider } from "./context/AuthContext";
 import UploadResume from "./components/UploadResume/UploadResume";
 import SkillsToLearn from "./components/SkillsToLearn/SkillsToLearn";
 import QASection from "./components/QASection/QASection"; 
+import HackathonList from "./components/Hackathon/HackathonList"; // Import HackathonFinder
+import JobList from "./components/JobListing/JobList";
 import './App.css'; 
 
 function App() {
@@ -33,7 +35,10 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/upload-resume" element={<UploadResume />} />
             <Route path="/skills-to-learn" element={<SkillsToLearn />} />
-            <Route path="/qa/*" element={<QASection />} />           
+            <Route path="/qa/*" element={<QASection />} />
+            <Route path="/hackathon" element={<HackathonList />} /> {/* Use HackathonFinder component */}
+            <Route path="/jobs" element={<JobList />} />
+
           </Routes>
         </div>
       </Router>

@@ -3,6 +3,7 @@ import { getAuth } from "firebase/auth";
 import { getDatabase, ref, update, get, push, set } from "firebase/database"; // Realtime Database
 import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore"; // Firestore
 
+
 // 🔹 Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyCc9qZuTo0PkwIWoQUlhBjpNjc3ENQGTZc",
@@ -164,6 +165,7 @@ export const fetchQuestions = async () => {
         return {};
     }
 };
+
 
 // 🔹 Export Firebase instances
 export { app, auth, dbRealtime, dbFirestore };
