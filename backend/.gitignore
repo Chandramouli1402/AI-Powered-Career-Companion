@@ -2,3 +2,4 @@ uploads/
 credentials.json
 .env
 serviceAccountKey.json
+node_modules/

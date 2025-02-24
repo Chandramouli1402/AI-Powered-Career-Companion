@@ -1,94 +1,109 @@
-/* 🌟 General container styling */
+/* Import Inter font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* 🌟 General Container Styling */
 .hackathon-container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
     background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Inter', sans-serif;
 }
 
-/* 🌟 Hackathon list container */
+/* 🌟 Heading */
+.hackathon-container h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f2937;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* 🌟 Hackathon List Container */
 .hackathon-list {
-    list-style: none !important; /* ✅ Force remove bullets */
-    padding: 0;
-    margin: 0; /* ✅ Prevents extra spacing */
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 100%;
+    gap: 0; /* Remove default gap */
+    padding: 0;
+    margin: 0;
 }
 
-/* 🌟 Individual hackathon items */
+/* 🌟 Individual Hackathon Card */
 .hackathon-item {
-    width: 90%;
-    max-width: 600px;
-    background-color: #f9f9f9;
-    padding: 15px;
-    margin: 10px auto;
+    list-style: none; /* Removes bullet points */
+    background-color: #fff;
+    border: 1px solid #d1d5db;
     border-radius: 8px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: left;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    
+    /* 🔹 INCREASED SPACE BETWEEN HACKATHONS */
+    margin-bottom: 4rem; /* Add more vertical spacing */
 }
 
-/* 🌟 Ensure <li> doesn't show bullets */
-.hackathon-item li {
-    list-style: none !important; /* ✅ Remove bullet points from <li> */
-    display: block; /* ✅ Ensure proper layout */
+.hackathon-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* 🌟 Hackathon title */
+/* 🌟 Hackathon Title */
 .hackathon-item strong {
-    font-size: 18px;
+    font-size: 1.6rem;
+    font-weight: 600;
     color: #007bff;
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
-/* 🌟 Date & location */
+/* 🌟 Date & Location */
 .hackathon-item p {
-    margin: 5px 0;
-    font-size: 14px;
-    color: #444;
+    font-size: 1rem;
+    color: #4b5563;
+    margin-bottom: 1rem;
 }
 
-/* 🌟 Visit button */
+/* 🌟 Visit Button */
 .hackathon-item a {
-    display: block;
-    width: fit-content;
-    text-decoration: none;
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background-color: #3b82f6;
     color: white;
-    background-color: #007bff;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-size: 14px;
-    margin-top: 10px;
-    text-align: center;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
 }
 
-/* 🌟 Center the button */
 .hackathon-item a:hover {
-    background-color: #0056b3;
+    background-color: #2563eb;
 }
 
-/* 🌟 Dropdown styling */
+/* 🌟 Dropdown Styling */
 .hackathon-select {
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-bottom: 20px;
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #fff;
     cursor: pointer;
-    text-align: center;
+    transition: border-color 0.2s ease;
+    margin-bottom: 2rem;
 }
 
-/* 🌟 Mobile responsiveness */
+.hackathon-select:focus {
+    border-color: #3b82f6;
+    outline: none;
+}
+
+/* 🌟 Mobile Responsiveness */
 @media (max-width: 768px) {
     .hackathon-container {
         width: 90%;
-    }
-    .hackathon-item {
-        width: 100%;
+        padding: 1.5rem;
     }
 }

@@ -64,7 +64,7 @@
 /* Courses List Styling */
 .courses-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: 1fr; /* Only one column */
     gap: 1.5rem;
 }
 

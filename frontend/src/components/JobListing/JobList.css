@@ -1,96 +1,127 @@
-/* JobList.css */
-
 /* 🌟 Main Container */
 .job-container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
+    max-width: 1500px; 
+    margin: 50px auto; 
+    padding: 30px;
     background: #ffffff;
-    border-radius: 10px;
+    border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
 /* 🌟 Title */
 .job-title {
-    font-size: 24px;
+    font-size: 30px; 
     font-weight: bold;
     color: #222;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
-/* 🌟 Dropdown Label */
+/*  Dropdown Label */
 .filter-label {
-    font-size: 16px;
+    font-size: 18px; 
     font-weight: bold;
     color: #333;
-    margin-right: 10px;
+    margin-right: 12px;
 }
 
-/* 🌟 Dropdown Select */
+/* Dropdown Select */
 .filter-select {
-    padding: 8px;
-    font-size: 16px;
+    padding: 10px;
+    font-size: 18px;
     border: 2px solid #007bff;
-    border-radius: 5px;
+    border-radius: 6px;
     background: #f9f9f9;
     cursor: pointer;
 }
 
-/* 🌟 Job List */
+/* Job List */
 .job-list {
     list-style: none;
     padding: 0;
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
-/* 🌟 Job Items */
+/* Job Items */
 .job-item {
     background: #f9f9f9;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: left;
+    padding: 25px; 
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 4rem;
+    line-height: 2; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+/* Job Item Text */
 .job-item strong {
-    font-size: 18px;
+    font-size: 20px; 
     color: #007bff;
 }
 
 .job-item span {
-    font-size: 14px;
+    font-size: 18px;
     color: #444;
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
+/* Apply Now Button */
 .job-item a {
     text-decoration: none;
     color: white;
     background: #007bff;
-    padding: 6px 12px;
-    border-radius: 5px;
-    font-size: 14px;
-    display: inline-block;
+    padding: 14px 22px; 
+    border-radius: 6px;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 18px;
 }
 
 .job-item a:hover {
     background: #0056b3;
 }
 
-/* 🌟 No Jobs Message */
+/* No Jobs Message */
 .no-jobs {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
     color: #777;
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
-/* 🌟 Responsive */
+/* Responsive */
+@media (max-width: 1024px) {
+    .job-container {
+        max-width: 90%;
+        padding: 25px;
+    }
+}
+
 @media (max-width: 768px) {
     .job-container {
-        width: 90%;
+        max-width: 95%;
+        padding: 20px;
+    }
+
+    .job-title {
+        font-size: 26px;
+    }
+
+    .filter-label,
+    .job-item strong,
+    .job-item span {
+        font-size: 16px;
+    }
+
+    .job-item {
+        padding: 20px;
+    }
+
+    .job-item a {
+        font-size: 16px;
+        padding: 12px 20px;
     }
 }

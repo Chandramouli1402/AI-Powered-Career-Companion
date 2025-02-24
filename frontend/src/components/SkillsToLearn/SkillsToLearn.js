@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchCourses } from "../../firebase-config";
-
+import "./SkillsToLearn.css";
 /**
  * 🔹 Extracts platform name from Markdown-style links
  */
