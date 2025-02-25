@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation, useNavigate } from "react-router-dom";
-import SignUp from "./SignUp";
-import Login from "./Login";
+import SignUp from "./components/SignUp/SignUp";
+import Login from "./components/Login/Login";
 import Profile from "./components/Profile/Profile"; 
 import Dashboard from "./components/DashBoard/Dashboard";
 import { AuthProvider, useAuth } from "./context/AuthContext"; 
