@@ -74,7 +74,7 @@ AI-Powered Career Companion, is a web application which helps users with AI resu
 - PROFILE - To access the profile page
 - LOGOUT - To logout of the web application
 
-  # SUMMARY
+# SUMMARY
   Our project, AI-Powered Career Companion, is built with the vision of empowering individuals in their career journey
 
 - Helping Entrepreneurs Take Off : Starting a business can be overwhelming, but our Q/A Forum and Hackathon Listings create a space where aspiring entrepreneurs can connect, seek advice, and find opportunities to sharpen their skills and grow their ventures.
