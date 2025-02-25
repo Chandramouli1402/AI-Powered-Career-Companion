@@ -1,7 +1,5 @@
-/* Import Inter font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* 🌟 General Container Styling */
 .hackathon-container {
     max-width: 1200px;
     margin: 2rem auto;
@@ -12,7 +10,6 @@
     font-family: 'Inter', sans-serif;
 }
 
-/* 🌟 Heading */
 .hackathon-container h2 {
     font-size: 2rem;
     font-weight: 700;
@@ -21,27 +18,23 @@
     margin-bottom: 2rem;
 }
 
-/* 🌟 Hackathon List Container */
 .hackathon-list {
     display: flex;
     flex-direction: column;
-    gap: 0; /* Remove default gap */
+    gap: 0; 
     padding: 0;
     margin: 0;
 }
 
-/* 🌟 Individual Hackathon Card */
 .hackathon-item {
-    list-style: none; /* Removes bullet points */
+    list-style: none; 
     background-color: #fff;
     border: 1px solid #d1d5db;
     border-radius: 8px;
     padding: 1.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    
-    /* 🔹 INCREASED SPACE BETWEEN HACKATHONS */
-    margin-bottom: 4rem; /* Add more vertical spacing */
+    margin-bottom: 4rem;
 }
 
 .hackathon-item:hover {
@@ -49,7 +42,6 @@
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* 🌟 Hackathon Title */
 .hackathon-item strong {
     font-size: 1.6rem;
     font-weight: 600;
@@ -58,14 +50,12 @@
     margin-bottom: 8px;
 }
 
-/* 🌟 Date & Location */
 .hackathon-item p {
     font-size: 1rem;
     color: #4b5563;
     margin-bottom: 1rem;
 }
 
-/* 🌟 Visit Button */
 .hackathon-item a {
     display: inline-block;
     padding: 0.6rem 1.2rem;
@@ -82,7 +72,6 @@
     background-color: #2563eb;
 }
 
-/* 🌟 Dropdown Styling */
 .hackathon-select {
     width: 100%;
     padding: 0.75rem;
@@ -100,7 +89,6 @@
     outline: none;
 }
 
-/* 🌟 Mobile Responsiveness */
 @media (max-width: 768px) {
     .hackathon-container {
         width: 90%;

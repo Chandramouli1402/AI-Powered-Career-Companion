@@ -1,7 +1,5 @@
-/* Import Inter font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* Global Styles */
 body {
     font-family: 'Inter', sans-serif;
     margin: 0;
@@ -10,7 +8,6 @@ body {
     color: #111827;
 }
 
-/* App Container */
 .App {
     display: flex;
     flex-direction: column;
@@ -18,7 +15,6 @@ body {
     text-align: center;
 }
 
-/* Header Styling */
 .App-header {
     background-color: #3b82f6; /* Blue background */
     padding: 3rem 2rem;
@@ -30,7 +26,6 @@ body {
     position: relative;
 }
 
-/* App Title */
 .App-header h1 {
     font-size: 2.5rem;
     font-weight: 700;
@@ -41,19 +36,17 @@ body {
     transform: translateX(-50%);
 }
 
-/* Header Buttons Container */
 .header-buttons {
     display: flex;
-    gap: 1rem; /* Space between buttons */
+    gap: 1rem;
     position: absolute;
     right: 2rem;
 }
 
-/* Navigation Buttons (Profile & Dashboard) */
 .nav-button {
     text-decoration: none;
     color: #ffffff;
-    background-color: #2563eb; /* Slightly darker blue */
+    background-color: #2563eb;
     padding: 10px 20px;
     border-radius: 8px;
     font-size: 1rem;
@@ -63,11 +56,10 @@ body {
 }
 
 .nav-button:hover {
-    background-color: #1e40af; /* Darker blue on hover */
-    transform: scale(1.05); /* Slight zoom effect */
+    background-color: #1e40af;
+    transform: scale(1.05); 
 }
 
-/* Main Content Area */
 main {
     flex: 1;
     padding: 2rem;
@@ -76,7 +68,6 @@ main {
     width: 100%;
 }
 
-/* Links and Buttons */
 a {
     color: #3b82f6;
     text-decoration: none;
@@ -110,7 +101,6 @@ button:disabled {
     cursor: not-allowed;
 }
 
-/* Form Styling */
 form {
     display: flex;
     flex-direction: column;
@@ -136,7 +126,6 @@ input:focus {
     outline: none;
 }
 
-/* Utility Classes */
 .text-center {
     text-align: center;
 }

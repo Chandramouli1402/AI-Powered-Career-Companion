@@ -1,33 +1,51 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import SignUp from "./SignUp";
 import Login from "./Login";
 import Profile from "./components/Profile/Profile"; 
-import Dashboard from "./components/Dashboard";
-import { AuthProvider } from "./context/AuthContext"; 
+import Dashboard from "./components/DashBoard/Dashboard";
+import { AuthProvider, useAuth } from "./context/AuthContext"; 
 import UploadResume from "./components/UploadResume/UploadResume";
 import SkillsToLearn from "./components/SkillsToLearn/SkillsToLearn";
 import QASection from "./components/QASection/QASection"; 
-import HackathonList from "./components/Hackathon/HackathonList"; // Import HackathonFinder
+import HackathonList from "./components/Hackathon/HackathonList";
 import JobList from "./components/JobListing/JobList";
 import './App.css'; 
 
+const Header = () => {
+  const { user, logout } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const hideNavButtons = location.pathname === "/login" || location.pathname === "/signup";
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login"); 
+  };
+
+  return (
+    <header className="App-header">
+      <div className="header-spacer"></div>
+      <h1>Equipping Graduates</h1>
+
+      {!hideNavButtons && user && (
+        <div className="header-buttons">
+          <Link to="/dashboard" className="nav-button">Dashboard</Link>
+          <Link to="/profile" className="nav-button">Profile</Link>
+          <button onClick={handleLogout} className="nav-button">Logout</button>
+        </div>
+      )}
+    </header>
+  );
+};
+
 function App() {
   return (
-    <AuthProvider>
-      <Router>
+    <Router>
+      <AuthProvider> 
         <div className="App">
-          <header className="App-header">
-            <div className="header-spacer"></div> {/* Spacer for balance */}
-            <h1>Equipping Graduates</h1>
-            <div className="header-buttons">
-              <Link to="/dashboard" className="nav-button">Dashboard</Link>
-              <Link to="/profile" className="nav-button">Profile</Link>
-            </div>
-          </header>
-
+          <Header />
           <Routes>
-            {/* Redirect root ("/") to Login */}
             <Route path="/" element={<Navigate replace to="/login" />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
@@ -36,13 +54,12 @@ function App() {
             <Route path="/upload-resume" element={<UploadResume />} />
             <Route path="/skills-to-learn" element={<SkillsToLearn />} />
             <Route path="/qa/*" element={<QASection />} />
-            <Route path="/hackathon" element={<HackathonList />} /> {/* Use HackathonFinder component */}
+            <Route path="/hackathon" element={<HackathonList />} />
             <Route path="/jobs" element={<JobList />} />
-
           </Routes>
         </div>
-      </Router>
-    </AuthProvider>
+      </AuthProvider>
+    </Router>
   );
 }
 

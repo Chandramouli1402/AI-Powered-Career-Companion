@@ -1,4 +1,4 @@
-import { dbFirestore } from "./src/firebase-config.js";  // ✅ Correct import
+import { dbFirestore } from "./src/firebase-config.js";  
 import { collection, addDoc } from "firebase/firestore"; 
 const courses = [
   {
@@ -899,10 +899,7 @@ const courses = [
 },
 ];
 
-/**
- * 🔹 Upload multiple courses to Firestore
- * Ensures platform is stored as a simple string, not as an object with a link.
- */
+/*Upload multiple courses to Firestore */
 const uploadData = async (courses) => {
     try {
         const coursesRef = collection(dbFirestore, "courses");
@@ -915,7 +912,7 @@ const uploadData = async (courses) => {
 
             await addDoc(coursesRef, {
                 title: course.title,
-                platform: extractPlatformName(course.platform), // Store only the name
+                platform: extractPlatformName(course.platform), 
                 price: course.price,
                 link: course.link,
                 category: course.category,
@@ -929,15 +926,12 @@ const uploadData = async (courses) => {
     }
 };
 
-/**
- * 🔹 Extracts platform name from Markdown-style links (e.g., "[Name](URL)")
- * If no markdown detected, returns the original string.
- */
+
 const extractPlatformName = (platform) => {
     if (!platform) return "Unknown Platform";
 
     const match = platform.match(/\[(.*?)\]/);
-    return match ? match[1] : platform; // Extracts name or returns raw text
+    return match ? match[1] : platform; 
 };
 
 

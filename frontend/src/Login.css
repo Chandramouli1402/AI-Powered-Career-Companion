@@ -1,11 +1,10 @@
-/* Added styles for Sign Up section */
 .signup-text {
     margin-top: 1rem;
     font-size: 1rem;
     color: #4b5563;
     font-weight: 500;
 }
-/* Sign Up button - Smaller width and centered */
+
 .signup-button {
     margin-top: 0.5rem;
     padding: 0.5rem 1.5rem;
@@ -17,8 +16,8 @@
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.2s ease;
-    width: auto; /* Adjusted width */
-    display: inline-block; /* Makes it fit the content */
+    width: auto;
+    display: inline-block; 
 }
 
 .signup-button:hover {

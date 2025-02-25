@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, Link, useParams } from "react-router-dom";
 import { dbFirestore, auth } from "../../firebase-config"; 
 import { collection, getDocs, addDoc, doc, updateDoc, arrayUnion } from "firebase/firestore"; 
-import { useAuthState } from "react-firebase-hooks/auth"; // ✅ Import Auth Hook
+import { useAuthState } from "react-firebase-hooks/auth";
 import "./QASection.css";
 
 function AskQuestion({ onSubmit }) {
@@ -103,7 +103,7 @@ function QuestionDetail({ questions, addAnswer }) {
 
 const QASection = () => {
     const [questions, setQuestions] = useState([]);
-    const [user] = useAuthState(auth); // ✅ Get current logged-in user
+    const [user] = useAuthState(auth); // Get current logged-in user
 
     useEffect(() => {
         const fetchQuestions = async () => {
@@ -132,8 +132,8 @@ const QASection = () => {
         try {
             const docRef = await addDoc(collection(dbFirestore, "questions"), {
                 text: questionText,
-                userId: user.uid, // ✅ Store User ID
-                userName: user.displayName || "Anonymous", // ✅ Store User Name
+                userId: user.uid, // Store User ID
+                userName: user.displayName || "Anonymous", // Store User Name
                 answers: []
             });
 
@@ -153,8 +153,8 @@ const QASection = () => {
             const questionRef = doc(dbFirestore, "questions", questionId);
             const newAnswer = { 
                 text: answerText, 
-                userId: user.uid,  // ✅ Use Logged-in User ID
-                userName: user.displayName || "Anonymous" // ✅ Use Logged-in User Name
+                userId: user.uid, 
+                userName: user.displayName || "Anonymous" 
             };
 
             await updateDoc(questionRef, {

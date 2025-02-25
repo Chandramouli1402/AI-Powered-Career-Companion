@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { dbFirestore } from "../../firebase-config";
 import { collection, getDocs } from "firebase/firestore";
-import "./JobList.css"; // Import styles
+import "./JobList.css"; 
 
 const JobList = () => {
     const [jobs, setJobs] = useState([]);
@@ -26,16 +26,16 @@ const JobList = () => {
         fetchJobs();
     }, []);
 
-    // 🌟 Fix: Ensure job.location is not undefined before filtering
+
     const filteredJobs = selectedLocation === "All"
         ? jobs
-        : jobs.filter(job => (job.location || "").includes(selectedLocation)); // ✅ Safe filtering
+        : jobs.filter(job => (job.location || "").includes(selectedLocation)); 
 
     return (
         <div className="job-container">
             <h2 className="job-title">Job Listings</h2>
 
-            {/* 🌟 Location Filter */}
+            {/* Location Filter */}
             <label className="filter-label">Filter by Location: </label>
             <select className="filter-select" onChange={(e) => setSelectedLocation(e.target.value)} value={selectedLocation}>
                 <option value="All">All</option>
@@ -50,7 +50,7 @@ const JobList = () => {
                     filteredJobs.map((job) => (
                         <li key={job.id} className="job-item">
                             <strong>{job.role}</strong> at {job.company}
-                            <span>Location: {job.location || "Not Specified"}</span> {/* ✅ Safe fallback */}
+                            <span>Location: {job.location || "Not Specified"}</span>
                             <a href={job.applyLink} target="_blank" rel="noopener noreferrer">Apply Now</a>
                         </li>
                     ))

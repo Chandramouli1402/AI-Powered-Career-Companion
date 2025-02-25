@@ -139,9 +139,7 @@ const  hackathonData = [
         }
 ];
 
-/**
- * 🔹 Upload hackathons to Firestore
- */
+/*Upload hackathons to Firestore*/
 export const uploadHackathons = async () => {
     try {
         const hackathonsCollection = collection(dbFirestore, "hackathons");

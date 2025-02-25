@@ -1,4 +1,4 @@
-const { dbFirestore } = require("./src/firebase-config"); // ✅ Change import to require
+const { dbFirestore } = require("./src/firebase-config"); 
 const { collection, addDoc } = require("firebase/firestore");
 const jobListings = [
     {
@@ -46,9 +46,7 @@ const jobListings = [
     }
 ];
 
-/**
- * 🔹 Upload jobs to Firestore
- */
+/*Upload jobs to Firestore*/
 const uploadJobs = async () => {
     try {
         const jobsCollection = collection(dbFirestore, "jobs");
@@ -64,8 +62,5 @@ const uploadJobs = async () => {
     }
 };
 
-// ✅ Use CommonJS export
 module.exports = { uploadJobs };
-
-// Run the function when the script is executed
 uploadJobs();

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { dbFirestore } from "../../firebase-config";
 import { collection, getDocs } from "firebase/firestore";
-import "./HackathonList.css"; // ✅ External CSS
+import "./HackathonList.css"; 
 
 const HackathonList = () => {
     const [hackathons, setHackathons] = useState([]);
-    const [selectedMonth, setSelectedMonth] = useState("All"); // ✅ Default is "All"
+    const [selectedMonth, setSelectedMonth] = useState("All"); 
 
     useEffect(() => {
         const fetchHackathons = async () => {
@@ -26,17 +26,17 @@ const HackathonList = () => {
         fetchHackathons();
     }, []);
 
-    // ✅ Filter hackathons based on the "month" field
+    // Filter hackathons based on the "month" field
     const filteredHackathons = hackathons.filter((hackathon) => {
         if (selectedMonth === "All") return true;
-        return hackathon.month === selectedMonth; // ✅ Directly filter using "month" field
+        return hackathon.month === selectedMonth; 
     });
 
     return (
         <div className="hackathon-container">
             <h2>Hackathon List</h2>
 
-            {/* ✅ Dropdown to select month */}
+            {/* Dropdown to select month */}
             <select
                 className="hackathon-select"
                 value={selectedMonth}
@@ -55,7 +55,7 @@ const HackathonList = () => {
                 <option value="October">October</option>
                 <option value="November">November</option>
                 <option value="December">December</option>
-                <option value="TBA">TBA</option> {/* ✅ Added "TBA" */}
+                <option value="TBA">TBA</option> 
             </select>
 
             <ul>
@@ -65,6 +65,7 @@ const HackathonList = () => {
                             <strong>📢 {hackathon.title || "No Title"}</strong>
                             <p>📅 {hackathon.dates || "TBA"}</p>
                             <p>📍 {hackathon.location || "Online"}</p>
+                            <p>🏆 Prizes: {hackathon.prizes ? hackathon.prizes : "N/A"}</p>
                             <a href={hackathon.link} target="_blank" rel="noopener noreferrer">
                                 🔗 Visit
                             </a>
