@@ -1,7 +1,6 @@
-// src/context/AuthContext.js
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { auth } from "../firebase-config";  // Corrected path to firebase-config.js
-import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../firebase-config";  
+import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 const AuthContext = createContext();
 
@@ -20,8 +19,17 @@ export const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
+  const login = async (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const logout = async () => {
+    await signOut(auth);
+    setUser(null);
+  };
+
   return (
-    <AuthContext.Provider value={user}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { db, auth } from "../../firebase-config"; // Add auth here
+import { db, auth } from "../../firebase-config"; 
 
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useParams } from "react-router-dom";

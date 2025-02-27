@@ -4,7 +4,7 @@ import { getDatabase, ref, update, get, push, set } from "firebase/database"; //
 import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore"; // Firestore
 
 
-// 🔹 Firebase configuration
+//Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyCc9qZuTo0PkwIWoQUlhBjpNjc3ENQGTZc",
     authDomain: "ai-powered-career-companion.firebaseapp.com",
@@ -16,17 +16,13 @@ const firebaseConfig = {
     measurementId: "G-B4ML4P5DSZ"
 };
 
-// 🔹 Initialize Firebase
+//Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const dbRealtime = getDatabase(app); // Realtime Database
 const dbFirestore = getFirestore(app); // Firestore Database
 
-/**
- * 🔹 Fetch user profile data from Firebase Realtime Database.
- * @param {string} userId - The user's unique ID.
- * @returns {Promise<Object|null>} - User profile data or null if not found.
- */
+/* Fetch user profile data from Firebase Realtime Database.*/
 export const fetchUserProfile = async (userId) => {
     if (!userId) {
         console.error("❌ Error: User ID is required to fetch profile data.");
@@ -43,17 +39,14 @@ export const fetchUserProfile = async (userId) => {
     }
 };
 
-/**
- * 🔹 Fetch all courses from Firestore.
- * @returns {Promise<Array>} - List of course objects.
- */
+/*Fetch all courses from Firestore.*/
 export const fetchCourses = async () => {
     try {
         const coursesRef = collection(dbFirestore, "courses");
         const querySnapshot = await getDocs(coursesRef);
         return querySnapshot.docs.map((doc) => ({
             id: doc.id,
-            ...doc.data(), // 🔥 Retrieve all fields
+            ...doc.data(), 
         }));
     } catch (error) {
         console.error("❌ Error fetching courses:", error);
@@ -61,11 +54,7 @@ export const fetchCourses = async () => {
     }
 };
 
-/**
- * 🔹 Update user profile data in Firebase Realtime Database.
- * @param {string} userId - The user's unique ID.
- * @param {Object} updatedData - The user profile data to update.
- */
+/* Update user profile data in Firebase Realtime Database.*/
 export const updateUserProfile = async (userId, updatedData) => {
     if (!userId || !updatedData) {
         console.error("❌ Error: User ID and profile data are required.");
@@ -81,11 +70,7 @@ export const updateUserProfile = async (userId, updatedData) => {
     }
 };
 
-/**
- * 🔹 Save resume link in Firebase Realtime Database.
- * @param {string} userId - The user's unique ID.
- * @param {string} link - The resume download URL.
- */
+/*Save resume link in Firebase Realtime Database.*/
 export const saveResumeLink = async (userId, link) => {
     if (!userId || !link) {
         console.error("❌ Error: User ID and resume link are required.");
@@ -101,10 +86,7 @@ export const saveResumeLink = async (userId, link) => {
     }
 };
 
-/**
- * 🔹 Upload multiple courses to Firestore Database.
- * @param {Array} courses - List of course objects to upload.
- */
+/*Upload multiple courses to Firestore Database.*/
 export const uploadCourses = async (courses) => {
     if (!Array.isArray(courses) || courses.length === 0) {
         console.error("❌ Error: Invalid course list.");
@@ -123,11 +105,7 @@ export const uploadCourses = async (courses) => {
     }
 };
 
-/**
- * 🔹 Save a question to Firebase Realtime Database.
- * @param {string} userId - The user's unique ID.
- * @param {string} questionText - The question text.
- */
+/* Save a question to Firebase Realtime Database.*/
 export const saveQuestion = async (userId, questionText) => {
     if (!userId || !questionText) {
         console.error("❌ Error: User ID and question are required.");
@@ -136,13 +114,13 @@ export const saveQuestion = async (userId, questionText) => {
 
     try {
         const questionsRef = ref(dbRealtime, "questions");
-        const newQuestionRef = push(questionsRef); // Create a unique ID for each question
+        const newQuestionRef = push(questionsRef);
 
         await set(newQuestionRef, {
             question: questionText,
             userId,
             timestamp: Date.now(),
-            answers: [] // Ensuring a consistent data structure
+            answers: []
         });
 
         console.log("✅ Question saved successfully.");
@@ -151,10 +129,7 @@ export const saveQuestion = async (userId, questionText) => {
     }
 };
 
-/**
- * 🔹 Fetch all questions from Firebase Realtime Database.
- * @returns {Promise<Object>} - Returns an object with questions.
- */
+/* Fetch all questions from Firebase Realtime Database.*/
 export const fetchQuestions = async () => {
     try {
         const questionsRef = ref(dbRealtime, "questions");
@@ -167,5 +142,5 @@ export const fetchQuestions = async () => {
 };
 
 
-// 🔹 Export Firebase instances
+//Export Firebase instances
 export { app, auth, dbRealtime, dbFirestore };

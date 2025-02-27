@@ -14,8 +14,7 @@ app.use(express.json({ limit: "10mb" }));
 app.use(cors());
 
 // Initialize Firebase Admin SDK
-
-const serviceAccount = require("./serviceAccountKey.json"); // Ensure correct path
+const serviceAccount = require("./serviceAccountKey.json"); 
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),

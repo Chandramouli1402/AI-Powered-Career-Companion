@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { db, auth } from "../../firebase-config"; // Single import statement
+import { db, auth } from "../../firebase-config";
 import { collection, addDoc } from "firebase/firestore";
 
 function AskQuestion() {
