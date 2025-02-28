@@ -17,9 +17,9 @@ const JobList = () => {
                     ...doc.data()
                 }));
                 setJobs(fetchedJobs);
-                console.log("✅ Jobs fetched:", fetchedJobs);
+                console.log("Jobs fetched:", fetchedJobs);
             } catch (error) {
-                console.error("❌ Error fetching jobs:", error);
+                console.error("Error fetching jobs:", error);
             }
         };
 

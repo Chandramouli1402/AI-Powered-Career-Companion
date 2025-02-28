@@ -1,14 +1,13 @@
-// src/components/SignUp/SignUp.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase-config"; // Ensure correct import path
+import { auth } from "../../firebase-config"; 
 import "./SignUp.css";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState(""); // Added confirm password field
+  const [confirmPassword, setConfirmPassword] = useState(""); 
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 

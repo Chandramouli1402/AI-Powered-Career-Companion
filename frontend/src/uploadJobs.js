@@ -1,4 +1,4 @@
-import { dbFirestore } from "./firebase-config"; // ✅ Ensure correct path
+import { dbFirestore } from "./firebase-config"; 
 import { collection, addDoc } from "firebase/firestore";
 export const jobs = [
     {
@@ -155,11 +155,11 @@ export const uploadJobs = async () => {
 
         for (let job of jobs) {
             await addDoc(jobsRef, job);
-            console.log(`✅ Job added: ${job.role} at ${job.company}`);
+            console.log(`Job added: ${job.role} at ${job.company}`);
         }
 
-        console.log("🎉 All jobs uploaded successfully!");
+        console.log("All jobs uploaded successfully!");
     } catch (error) {
-        console.error("❌ Error uploading jobs:", error);
+        console.error("Error uploading jobs:", error);
     }
 };

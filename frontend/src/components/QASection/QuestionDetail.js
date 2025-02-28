@@ -34,7 +34,7 @@ function QuestionDetail() {
       await updateDoc(docRef, {
         answers: [...question.answers, { text: answer, userId: user.uid }],
       });
-      setAnswer(""); // Clear input after submission
+      setAnswer(""); 
     } catch (error) {
       console.error("Error submitting answer:", error);
     }

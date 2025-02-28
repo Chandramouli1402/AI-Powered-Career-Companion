@@ -19,7 +19,7 @@ import QASection from "./components/QASection/QASection";
 import HackathonList from "./components/Hackathon/HackathonList";
 import JobList from "./components/JobListing/JobList";
 
-import UploadJobsPage from "./components/JobListing/UploadJobsPage"; // ✅ Correct path
+import UploadJobsPage from "./components/JobListing/UploadJobsPage"; 
 import "./App.css";
 
 const Header = () => {

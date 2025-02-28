@@ -19,7 +19,7 @@ const HackathonList = () => {
 
                 setHackathons(fetchedHackathons);
             } catch (error) {
-                console.error("❌ Error fetching hackathons:", error);
+                console.error("Error fetching hackathons:", error);
             }
         };
 

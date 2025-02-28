@@ -1,5 +1,5 @@
 import React from "react";
-import { uploadJobs } from "../../uploadJobs"; // ✅ Correct import
+import { uploadJobs } from "../../uploadJobs"; 
 
 const UploadJobsButton = () => {
     return (

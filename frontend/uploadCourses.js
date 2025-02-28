@@ -918,11 +918,11 @@ const uploadData = async (courses) => {
                 category: course.category,
             });
 
-            console.log(`✅ Uploaded: ${course.title}`);
+            console.log(`Uploaded: ${course.title}`);
         }
-        console.log("🎉 All courses uploaded successfully!");
+        console.log("All courses uploaded successfully!");
     } catch (error) {
-        console.error("❌ Error uploading courses:", error);
+        console.error("Error uploading courses:", error);
     }
 };
 

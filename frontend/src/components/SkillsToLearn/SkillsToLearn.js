@@ -2,14 +2,11 @@ import React, { useEffect, useState } from "react";
 import { fetchCourses } from "../../firebase-config";
 
 import "./SkillsToLearn.css";
-/**
- * 🔹 Extracts platform name from Markdown-style links
- */
 const extractPlatformName = (platform) => {
     if (!platform) return "Unknown Platform";
 
     const match = platform.match(/\[(.*?)\]/);
-    return match ? match[1] : platform; // Extracts name or returns raw text
+    return match ? match[1] : platform;
 };
 
 const SkillsToLearn = () => {
@@ -51,7 +48,7 @@ const SkillsToLearn = () => {
             <h2>Skills to Learn</h2>
             
 
-            {/* 🔎 Search and Filters */}
+            {/* Search and Filters */}
             <div className="filters-container">
                 <input
                     type="text"
@@ -82,7 +79,7 @@ const SkillsToLearn = () => {
                 </select>
             </div>
 
-            {/* 📚 Display Courses */}
+            {/*Display Courses */}
             <div className="courses-list">
                 {filteredCourses.length > 0 ? (
                     filteredCourses.map((course) => (

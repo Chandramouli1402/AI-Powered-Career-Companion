@@ -1,5 +1,5 @@
 import React from "react";
-import UploadJobsButton from "./UploadJobsButton"; // ✅ Correct path
+import UploadJobsButton from "./UploadJobsButton"; 
 
 const UploadJobsPage = () => {
     return (

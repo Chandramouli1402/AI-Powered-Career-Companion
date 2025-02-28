@@ -16,9 +16,9 @@ body {
 }
 
 .App-header {
-    background-color: #3b82f6; /* Blue background */
+    background-color: #3b82f6; 
     padding: 3rem 2rem;
-    color: #ffffff; /* White text */
+    color: #ffffff; 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;

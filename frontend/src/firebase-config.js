@@ -25,7 +25,7 @@ const dbFirestore = getFirestore(app); // Firestore Database
 /* Fetch user profile data from Firebase Realtime Database.*/
 export const fetchUserProfile = async (userId) => {
     if (!userId) {
-        console.error("❌ Error: User ID is required to fetch profile data.");
+        console.error("Error: User ID is required to fetch profile data.");
         return null;
     }
 
@@ -34,7 +34,7 @@ export const fetchUserProfile = async (userId) => {
         const snapshot = await get(userRef);
         return snapshot.exists() ? snapshot.val() : null;
     } catch (error) {
-        console.error("❌ Error fetching user profile:", error);
+        console.error("Error fetching user profile:", error);
         return null;
     }
 };
@@ -49,7 +49,7 @@ export const fetchCourses = async () => {
             ...doc.data(), 
         }));
     } catch (error) {
-        console.error("❌ Error fetching courses:", error);
+        console.error("Error fetching courses:", error);
         return [];
     }
 };
@@ -57,39 +57,39 @@ export const fetchCourses = async () => {
 /* Update user profile data in Firebase Realtime Database.*/
 export const updateUserProfile = async (userId, updatedData) => {
     if (!userId || !updatedData) {
-        console.error("❌ Error: User ID and profile data are required.");
+        console.error("Error: User ID and profile data are required.");
         return;
     }
 
     try {
         const userRef = ref(dbRealtime, `users/${userId}`);
         await update(userRef, updatedData);
-        console.log("✅ Profile updated successfully.");
+        console.log("Profile updated successfully.");
     } catch (error) {
-        console.error("❌ Error updating profile:", error);
+        console.error("Error updating profile:", error);
     }
 };
 
 /*Save resume link in Firebase Realtime Database.*/
 export const saveResumeLink = async (userId, link) => {
     if (!userId || !link) {
-        console.error("❌ Error: User ID and resume link are required.");
+        console.error("Error: User ID and resume link are required.");
         return;
     }
 
     try {
         const updateData = { resume: link, resumeTimestamp: Date.now() };
         await update(ref(dbRealtime, `users/${userId}`), updateData);
-        console.log("✅ Resume link saved successfully.");
+        console.log("Resume link saved successfully.");
     } catch (error) {
-        console.error("❌ Firebase save error:", error);
+        console.error("Firebase save error:", error);
     }
 };
 
 /*Upload multiple courses to Firestore Database.*/
 export const uploadCourses = async (courses) => {
     if (!Array.isArray(courses) || courses.length === 0) {
-        console.error("❌ Error: Invalid course list.");
+        console.error("Error: Invalid course list.");
         return;
     }
 
@@ -97,18 +97,18 @@ export const uploadCourses = async (courses) => {
         const coursesRef = collection(dbFirestore, "courses");
         for (let course of courses) {
             await addDoc(coursesRef, course);
-            console.log(`✅ Uploaded: ${course.title}`);
+            console.log(`Uploaded: ${course.title}`);
         }
-        console.log("🎉 All courses uploaded successfully!");
+        console.log("All courses uploaded successfully!");
     } catch (error) {
-        console.error("❌ Error uploading courses:", error);
+        console.error("Error uploading courses:", error);
     }
 };
 
 /* Save a question to Firebase Realtime Database.*/
 export const saveQuestion = async (userId, questionText) => {
     if (!userId || !questionText) {
-        console.error("❌ Error: User ID and question are required.");
+        console.error("Error: User ID and question are required.");
         return;
     }
 
@@ -123,9 +123,9 @@ export const saveQuestion = async (userId, questionText) => {
             answers: []
         });
 
-        console.log("✅ Question saved successfully.");
+        console.log("Question saved successfully.");
     } catch (error) {
-        console.error("❌ Error saving question:", error);
+        console.error("Error saving question:", error);
     }
 };
 
@@ -136,7 +136,7 @@ export const fetchQuestions = async () => {
         const snapshot = await get(questionsRef);
         return snapshot.exists() ? snapshot.val() : {}; // Return data if exists, else empty object
     } catch (error) {
-        console.error("❌ Error fetching questions:", error);
+        console.error("Error fetching questions:", error);
         return {};
     }
 };
