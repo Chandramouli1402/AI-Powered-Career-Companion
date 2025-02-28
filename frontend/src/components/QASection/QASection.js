@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, Link, useParams } from "react-router-dom";
-import { dbFirestore, auth } from "../../firebase-config"; 
-import { collection, getDocs, addDoc, doc, updateDoc, arrayUnion } from "firebase/firestore"; 
+import { dbFirestore, auth } from "../../firebase-config";
+import { collection, getDocs, addDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./QASection.css";
 
@@ -38,7 +38,7 @@ function QuestionList({ questions }) {
                 questions.map((q) => (
                     <div key={q.id} className="question-item">
                         <Link to={`/qa/question/${q.id}`} className="question-link">
-                            {q.text}
+                            {q.text} (Asked by {q.userName})
                         </Link>
                     </div>
                 ))
@@ -84,6 +84,7 @@ function QuestionDetail({ questions, addAnswer }) {
     return (
         <div className="question-detail">
             <h2>{question.text}</h2>
+            <p><strong>Asked by:</strong> {question.userName}</p>
             <AnswerForm onSubmit={(answer) => addAnswer(id, answer)} />
             <div className="answers-section">
                 <h3>Answers</h3>
@@ -103,7 +104,7 @@ function QuestionDetail({ questions, addAnswer }) {
 
 const QASection = () => {
     const [questions, setQuestions] = useState([]);
-    const [user] = useAuthState(auth); // Get current logged-in user
+    const [user] = useAuthState(auth);
 
     useEffect(() => {
         const fetchQuestions = async () => {
@@ -129,15 +130,17 @@ const QASection = () => {
             return;
         }
 
+        const userName = user.displayName || user.email.split("@")[0];
+
         try {
             const docRef = await addDoc(collection(dbFirestore, "questions"), {
                 text: questionText,
-                userId: user.uid, // Store User ID
-                userName: user.displayName || "Anonymous", // Store User Name
+                userId: user.uid,
+                userName: userName,
                 answers: []
             });
 
-            setQuestions(prevQuestions => [...prevQuestions, { id: docRef.id, text: questionText, answers: [], userId: user.uid, userName: user.displayName || "Anonymous" }]);
+            setQuestions(prevQuestions => [...prevQuestions, { id: docRef.id, text: questionText, answers: [], userId: user.uid, userName }]);
         } catch (error) {
             console.error("Error adding question:", error);
         }
@@ -149,12 +152,14 @@ const QASection = () => {
             return;
         }
 
+        const userName = user.displayName || user.email.split("@")[0];
+
         try {
             const questionRef = doc(dbFirestore, "questions", questionId);
-            const newAnswer = { 
-                text: answerText, 
-                userId: user.uid, 
-                userName: user.displayName || "Anonymous" 
+            const newAnswer = {
+                text: answerText,
+                userId: user.uid,
+                userName: userName
             };
 
             await updateDoc(questionRef, {
