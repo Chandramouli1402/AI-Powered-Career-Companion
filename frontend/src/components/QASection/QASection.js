@@ -174,7 +174,7 @@ const QASection = () => {
     return (
         <div className="qa-section">
             <h1>Q&A Section</h1>
-            {user ? <p>Logged in as: <strong>{user.displayName || "User"}</strong></p> : <p>Please log in to participate.</p>}
+            {user ? <p>Logged in as: <strong>{user.displayName || user.email.split("@")[0]}</strong></p> : <p>Please log in to participate.</p>}
             <Routes>
                 <Route
                     path="/"
