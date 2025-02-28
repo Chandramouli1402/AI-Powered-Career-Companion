@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-  Navigate,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import {BrowserRouter as Router,Routes,Route,Link,Navigate,useLocation,useNavigate,} from "react-router-dom";
 import SignUp from "./components/SignUp/SignUp";
 import Login from "./components/Login/Login";
 import Profile from "./components/Profile/Profile";
@@ -18,7 +10,6 @@ import SkillsToLearn from "./components/SkillsToLearn/SkillsToLearn";
 import QASection from "./components/QASection/QASection";
 import HackathonList from "./components/Hackathon/HackathonList";
 import JobList from "./components/JobListing/JobList";
-
 import UploadJobsPage from "./components/JobListing/UploadJobsPage"; 
 import "./App.css";
 
