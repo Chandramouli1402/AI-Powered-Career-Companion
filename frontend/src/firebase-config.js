@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getDatabase, ref, update, get, push, set } from "firebase/database"; // Realtime Database
+import { getDatabase, ref, update, get} from "firebase/database"; // Realtime Database
 import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore"; // Firestore
 
 
@@ -105,42 +105,4 @@ export const uploadCourses = async (courses) => {
     }
 };
 
-/* Save a question to Firebase Realtime Database.*/
-export const saveQuestion = async (userId, questionText) => {
-    if (!userId || !questionText) {
-        console.error("Error: User ID and question are required.");
-        return;
-    }
-
-    try {
-        const questionsRef = ref(dbRealtime, "questions");
-        const newQuestionRef = push(questionsRef);
-
-        await set(newQuestionRef, {
-            question: questionText,
-            userId,
-            timestamp: Date.now(),
-            answers: []
-        });
-
-        console.log("Question saved successfully.");
-    } catch (error) {
-        console.error("Error saving question:", error);
-    }
-};
-
-/* Fetch all questions from Firebase Realtime Database.*/
-export const fetchQuestions = async () => {
-    try {
-        const questionsRef = ref(dbRealtime, "questions");
-        const snapshot = await get(questionsRef);
-        return snapshot.exists() ? snapshot.val() : {}; // Return data if exists, else empty object
-    } catch (error) {
-        console.error("Error fetching questions:", error);
-        return {};
-    }
-};
-
-
-//Export Firebase instances
 export { app, auth, dbRealtime, dbFirestore };
